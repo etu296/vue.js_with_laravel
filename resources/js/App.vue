@@ -1,5 +1,14 @@
 <template>
 <div id="app">
-home
+<customer />
 </div>
 </template>
+<script>
+import customer from './components/customer.vue';
+
+export default{
+components:{
+    customer
+    }
+    }
+</script>
