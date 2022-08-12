@@ -97,19 +97,41 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-         <td>John</td>
-        <td>John</td>
-        <td>John</td>
-        <td>John</td>
+    <template v-for="customer in customers" :key="customer.id">
+     <tr>
+        <td>{{customer.name}}</td>
+         <td>{{customer.email}}</td>
+      
         <td>
         <button type="submit" style="padding: 7px 35px;margin:10px;" class="btn btn-default">Edit</button>
         <button type="submit" style="padding: 7px 35px;margin:10px;" class="btn btn-default">Delete</button>
         </td>
       </tr>
+    </template>
+     
       
     </tbody>
   </table>
 </div>
 </template>
+
+<script>
+import {ref , onMounted } from 'vue';
+import axios from 'axios';
+export default{
+setup()
+{
+const customers = ref([]);
+
+const getCustomer = async()=>{
+  let res = axios.get('http://localhost:8000/api/customers');
+  customers.value = res.data;
+  }
+  onMounted(getCustomer());
+  return {
+  customers
+  }
+}
+}
+ 
+</script>
